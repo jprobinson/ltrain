@@ -51,5 +51,6 @@ h1 {
 select {
     width:270px;
     font-size:1.6em;
-	font-family: inherit;
+    font-family: inherit;
+    -webkit-appearance: menulist-button;
 }
