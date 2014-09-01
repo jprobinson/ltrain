@@ -1,1 +1,1 @@
-a UI for the Graham Ave stop
+a UI for the L train countdown clock
