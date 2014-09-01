@@ -63,7 +63,7 @@ $(function() {
     stop.change(function(event){
         getTrainTime(updateClock);
     });
-    stop.select2({width:"element"});
+//    stop.select2({width:"element"});
     
     getTrainTime(updateClock);
     setTimeout(function() {
