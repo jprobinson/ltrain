@@ -7,3 +7,48 @@ body {
 h1 {
     font-size:7em;
 }
+
+.logo {
+    background: url('/images/ltrain.png') center top no-repeat;
+    background-size: 30px 30px;
+    display:inline-block;
+    width:30px;
+    height:30px;
+    padding-top:4px;
+}
+
+.toggle {
+    width:250px;
+    height:45px;
+    font-size:3em;
+    margin:auto;
+}
+
+.toggle-on, .toggle-off {
+    font-size:1em!important;
+}
+
+.toggle-dark .toggle-on, .toggle-dark .toggle-select .toggle-inner .active {
+  background: -webkit-gradient(linear, left top, left bottom, from(#242529), to(#34363b))!important;
+  background: -webkit-linear-gradient(top, #242529 0%, #34363b 100%)!important;
+  background: linear-gradient(top, #242529 0%, #34363b 100%)!important;
+}
+
+#nextClock, #followClock {
+    margin:auto;
+}
+
+#followClock {
+    font-size:3em;
+}
+
+.ltrain {
+    background-image: url('../images/ltrain.png');
+    height:85px;
+    width:85px;
+}
+
+select {
+    width:250px;
+    font-size:2em;
+}
