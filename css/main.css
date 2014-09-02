@@ -5,7 +5,7 @@ body {
 }
 
 h1 {
-    font-size:7em;
+    font-size:6em;
 }
 
 .logo {
@@ -40,12 +40,6 @@ h1 {
 
 #followClock {
     font-size:3em;
-}
-
-.ltrain {
-    background-image: url('../images/ltrain.png');
-    height:85px;
-    width:85px;
 }
 
 select {

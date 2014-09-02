@@ -2,18 +2,23 @@ var first = true;
 
 function getTrainTime(callback) {
     var stop = $('#stop').val();
-    console.log('getting train time for '+stop);
     $.get('/svc/subway-api/v1/next-trains/'+stop,
         function(data) {
-            console.log(data);
-            var next = new Date(data.southbound[0]);
-            var following = new Date(data.southbound[1]);
-
+            var next;
+            var following;
             var brooklyn = $('.toggle').data('toggles');
             if (brooklyn.active) {
-                next = new Date(data.northbound[0]);
-                following = new Date(data.northbound[1]);
-            } 
+                if (data.northbound != null) {
+                    next = new Date(data.northbound[0]);
+                    following = new Date(data.northbound[1]);
+                }
+            } else {
+                if (data.southbound != null) {
+                    next = new Date(data.southbound[0]);
+                    following = new Date(data.southbound[1]);
+                }
+            }
+
             callback(next, following);
         });
 }
@@ -26,10 +31,16 @@ function timeoutTrain() {
 }
 
 function updateClock(next, following) {
+    if (next == undefined) {
+        $('#nextClock').countdown('stop');
+        $('#nextClock').html('N/A');
+        $('#followClock').countdown('stop');
+        $('#followClock').html('N/A');
+        return;
+    }
     if (!first) {
         $('#nextClock').countdown(next);
         $('#followClock').countdown(following);
-
     } else {
         first = false;
         $('.clocks').each(function(){
@@ -39,9 +50,6 @@ function updateClock(next, following) {
                 time = next;
             }
             $this.countdown(time, function(event) {
-                if (event.type == "finish.countdown") {
-                   console.log('finished!?'); 
-                }
                 var format = '%M:%S';
                 $(this).html(event.strftime(format));
             });
@@ -63,7 +71,6 @@ $(function() {
     stop.change(function(event){
         getTrainTime(updateClock);
     });
-//    stop.select2({width:"element"});
     
     getTrainTime(updateClock);
     setTimeout(function() {
