@@ -86,6 +86,9 @@ function clearLocation() {
 }
 
 $(function() {
+    if (window.navigator.standalone) {
+        $("meta[name='apple-mobile-web-app-status-bar-style']").remove();
+    }
     var savedLoc = getLocation();   
     var startMhtn = true;
     if (savedLoc) {
