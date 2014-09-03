@@ -2,7 +2,7 @@ var first = true;
 
 function getTrainTime(callback) {
     var stop = $('#stop').val();
-    $.get('/svc/subway-api/v1/next-trains/'+stop,
+    $.get('http://localhost/svc/subway-api/v1/next-trains/'+stop,
         function(data) {
             var next;
             var following;
@@ -57,10 +57,46 @@ function updateClock(next, following) {
     }
 }
 
+function saveLocation() {
+    var loc = $('#stop').val();
+    var brooklyn = $('.toggle').data('toggles');
+    var finalLoc = loc + "|bk";
+    if (brooklyn.active) {
+        finalLoc = loc +"|mhtn";
+    }
+    localStorage.removeItem("savedstop");
+    localStorage.setItem("savedstop", finalLoc);
+    setLocName(loc);
+}
+
+function setLocName(loc) {
+    var locName = $('#stop option[value="'+loc+'"]').html();
+    $('#saved').html(locName.replace(/\&nbsp;/g,''));
+    $('#clear').show();
+}
+
+function getLocation() {
+    return localStorage.getItem("savedstop");
+}
+
+function clearLocation() {
+    localStorage.removeItem("savedstop");
+    $('#saved').html('');
+    $('#clear').hide();
+}
+
 $(function() {
+    var savedLoc = getLocation();   
+    var startMhtn = true;
+    if (savedLoc) {
+        var locData = savedLoc.split("|");
+        setLocName(locData[0]);
+        $('#stop').val(locData[0]);
+        startMhtn = locData[1] == "mhtn";
+    }
     $('.toggle').toggles({
         text:{on:'Manhattan',off:'Brooklyn'},
-        on: true,
+        on: startMhtn,
         width:250,
         height:50
     });
@@ -70,6 +106,14 @@ $(function() {
     var stop = $('#stop');
     stop.change(function(event){
         getTrainTime(updateClock);
+    });
+    $('#save').click(function(event) {
+        event.preventDefault();
+        saveLocation();
+    });
+    $('#clear').click(function(event) {
+        event.preventDefault();
+        clearLocation();
     });
     
     getTrainTime(updateClock);

@@ -46,5 +46,22 @@ select {
     width:270px;
     font-size:1.6em;
     font-family: inherit;
+    color: black;
     -webkit-appearance: menulist-button;
+}
+
+.locform {
+    padding-top:10px;
+}
+
+#save {
+    color:white;
+    font-family: inherit;
+    background: -webkit-gradient(linear, left top, left bottom, from(#242529), to(#34363b))!important;
+    background: -webkit-linear-gradient(top, #242529 0%, #34363b 100%)!important;
+    background: linear-gradient(top, #242529 0%, #34363b 100%)!important;
+    border-color:black;
+}
+#save:hover {
+    color:grey;
 }
