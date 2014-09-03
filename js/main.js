@@ -2,7 +2,7 @@ var first = true;
 
 function getTrainTime(callback) {
     var stop = $('#stop').val();
-    $.get('http://localhost/svc/subway-api/v1/next-trains/'+stop,
+    $.get('/svc/subway-api/v1/next-trains/'+stop,
         function(data) {
             var next;
             var following;

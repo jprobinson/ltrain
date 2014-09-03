@@ -2,6 +2,7 @@ body {
     background-color:black;
     color:white;
     text-align:center;
+    font-family:serif;
 }
 
 h1 {
@@ -64,4 +65,8 @@ select {
 }
 #save:hover {
     color:grey;
+}
+
+#clear {
+    display:none;
 }
